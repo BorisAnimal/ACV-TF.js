@@ -6,18 +6,53 @@
     <link rel="stylesheet" href="style.css"/>
     <script src="socket.io/socket.io.js"></script>
     <script src="client.js"></script>
+    <script src="utils.js"></script>
+    <script src="https://www.lactame.com/lib/image-js/0.21.2/image.min.js"></script>
+    <script>
+        function switchDebug() {
+            let elem = document.getElementById("debug-main")
+            let condition = document.getElementById("debug-switcher")
+            elem.style.visibility = condition.checked ? "visible" : "hidden"
+        }
+    </script>
 </head>
 <body>
-    <div align="center">
-        <h1>Awesome online OCR</h1>
+<!--Title-->
+<div align="center">
+    <h1>Awesome online OCR</h1>
+</div>
+<!--Options bar-->
+<div align="center">
+    <label class="child" style="margin-left: 100px">
+        <button id="clear-button">Clear</button>
+    </label>
+    <label class="child" style="margin-right: 10px">
+        Debug
+        <input type="checkbox" id="debug-switcher" checked onclick="switchDebug()">
+    </label>
+</div>
+<!--Drawing canvas-->
+<div align="center" style="width:100%">
+    <p>Draw here</p>
+    <canvas id="drawing" width="400" height="200"
+            style="border:1px solid black;">
+    </canvas>
+</div>
+<!--Prediction output-->
+<div align="center">
+    <p>Recognized:</p>
+    <p id="prediction"></p>
+</div>
+<!--Common debug container-->
+<div id="debug-main">
+    <!--Debug images-->
+    <div id="debug2" align="center">
+        <img id="debug_grey" height="0" width="0">
+        <div id="debug2_crops">
+
+        </div>
     </div>
-    <div align="center" style="width:100%">
-        <p>Draw here</p>
-        <canvas id="drawing" width="1000px" height="500px"></canvas>
-    </div>
-    <div>
-        <p>Recognized:</p>
-        <p id="prediction">TBD</p>
-    </div>
+</div>
+
 </body>
 </html>

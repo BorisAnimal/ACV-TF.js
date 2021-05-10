@@ -10,3 +10,10 @@ body, html{
    display: block;
    outline: black 10px solid;
 }
+
+.child {
+   display: table-cell;
+}
+.child:first-child .childinner {
+   margin-left: 0;
+}

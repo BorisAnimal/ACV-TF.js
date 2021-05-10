@@ -9,7 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tensorflow/tfjs-node": "^3.6.1",
+    "canvas": "^2.7.0",
     "express": "4.x",
+    "image-js": "^0.31.4",
     "socket.io": "2.x"
   }
 }
