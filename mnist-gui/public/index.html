@@ -15,6 +15,16 @@
             elem.style.visibility = condition.checked ? "visible" : "hidden"
         }
     </script>
+    <script>
+        function switchBboxes() {
+            let condition = document.getElementById("debug-bboxes");
+            let elements = document.getElementsByClassName('bbox');
+
+            for (let i of elements) {
+                i.style.visibility = condition.checked ? "visible" : "hidden";
+            }
+        }
+    </script>
 </head>
 <body>
 <!--Title-->
@@ -30,12 +40,20 @@
         Debug
         <input type="checkbox" id="debug-switcher" checked onclick="switchDebug()">
     </label>
+
+    <label class="child" style="margin: 10px">
+        Show bounding boxes
+        <input type="checkbox" id="debug-bboxes" onclick="switchBboxes()">
+    </label>
 </div>
 <!--Drawing canvas-->
-<div align="center" style="width:100%">
+<div id="drawing-container" align="center" style="width:100%">
     <p>Draw here</p>
-    <canvas id="drawing" width="400" height="200"
-            style="border:1px solid black;">
+    <div></div>
+    <canvas id="drawing"
+            height="300px"
+            width="1200px"
+            style="border:1px solid black; ">
     </canvas>
 </div>
 <!--Prediction output-->

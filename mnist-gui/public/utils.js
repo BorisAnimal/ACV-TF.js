@@ -27,6 +27,8 @@ async function instanceSegmentation(canvas, debug = null) {
     }
     grey = grey
         .dilate({iterations: 3})
+        .resize({width: 600, height: 300})
+        .dilate({iterations: 1})
 
 
     if (debug) {
@@ -54,8 +56,9 @@ async function instanceSegmentation(canvas, debug = null) {
         container.innerHTML = '';
     }
 
-    return rois.map((r) => {
-        [minX, maxX, minY, maxY] = [r.minX, r.maxX, r.minY, r.maxY]
+
+    let crops = rois.map((r) => {
+        let [minX, maxX, minY, maxY] = [r.minX, r.maxX, r.minY, r.maxY]
         let width = maxX - minX
         let height = maxY - minY
         let side = Math.max(width, height)
@@ -75,8 +78,13 @@ async function instanceSegmentation(canvas, debug = null) {
                 algorithm: 'set'
             })
             .resize({
-                width: 28,
-                height: 28,
+                width: 24,
+                height: 24,
+            })
+            .pad({
+                size: [2, 2],
+                color: [0],
+                algorithm: 'set'
             })
 
         if (debug) {
@@ -90,5 +98,15 @@ async function instanceSegmentation(canvas, debug = null) {
 
         return Object.values(x.data)
     })
+
+    let coords = rois.map((r) => {
+        return [
+            r.minX / mask.width, r.maxX / mask.width,
+            r.minY / mask.height, r.maxY / mask.height,
+        ]
+    })
+
+
+    return {images: crops, coords: coords}
 
 }
